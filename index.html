@@ -24,8 +24,8 @@
 <meta name="twitter:description" content="Residential and commercial construction in Atlanta, Georgia.">
 <meta name="twitter:image" content="assets/social-preview.jpg">
 
-<!-- Favicon: inline SVG skyline mark -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 110'%3E%3Crect width='140' height='110' rx='20' fill='%230b2240'/%3E%3Cpath d='M16 86 L70 32 L124 86' stroke='%23c9a227' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='34' y='44' width='13' height='42' fill='%23d7dadf'/%3E%3Crect x='51' y='26' width='15' height='60' fill='%23eef1f5'/%3E%3Crect x='70' y='38' width='13' height='48' fill='%23d7dadf'/%3E%3Crect x='87' y='48' width='15' height='38' fill='%23c9a227'/%3E%3Crect x='106' y='54' width='11' height='32' fill='%23d7dadf'/%3E%3C/svg%3E">
+<!-- Favicon: swap for your real logo file if you have a square icon version -->
+<link rel="icon" type="image/png" href="assets/logo.png">
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,6 +63,8 @@
   --radius:14px;
   --container:1180px;
   --ease:cubic-bezier(.16,.84,.32,1);
+  --whatsapp:#25D366;
+  --whatsapp-dark:#1DA851;
 }
 
 *,*::before,*::after{box-sizing:border-box;}
@@ -167,7 +169,11 @@ ul{margin:0;padding:0;list-style:none;}
   display:flex;align-items:center;gap:12px;
   font-family:'Playfair Display',serif;
 }
-.brand-mark{width:38px;height:30px;flex-shrink:0;}
+.brand-mark{
+  width:44px;height:44px;flex-shrink:0;
+  object-fit:contain;
+  border-radius:8px;
+}
 .brand-word{
   font-size:19px;font-weight:800;letter-spacing:0.02em;color:var(--ivory);line-height:1;
 }
@@ -415,6 +421,43 @@ ul{margin:0;padding:0;list-style:none;}
 @media (max-width:600px){.portfolio-grid{grid-template-columns:1fr;}}
 
 /* ============================================================
+   VIDEO SHOWCASE
+   ============================================================ */
+.video-grid{
+  display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;align-items:center;
+}
+.video-frame{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-sm);background:var(--navy-950);
+  aspect-ratio:16/9;
+}
+.video-frame video{width:100%;height:100%;object-fit:cover;display:block;}
+.video-frame .video-play-hint{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(6,15,31,0.28);pointer-events:none;opacity:1;transition:opacity .3s var(--ease);
+}
+.video-frame.is-playing .video-play-hint{opacity:0;}
+.video-play-hint i{
+  width:74px;height:74px;border-radius:50%;
+  background:linear-gradient(145deg,var(--gold-300),var(--gold-600));color:var(--navy-950);
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+  box-shadow:0 16px 32px -10px rgba(201,162,39,0.6);
+}
+.video-points{display:flex;flex-direction:column;gap:20px;}
+.video-point{display:flex;gap:16px;}
+.video-point i{
+  flex-shrink:0;width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(201,162,39,0.14);color:var(--gold-600);font-size:16px;
+}
+.video-point h4{font-size:15.5px;color:var(--navy-900);margin-bottom:4px;}
+.video-point p{font-size:14px;color:var(--ink-soft);line-height:1.55;}
+
+@media (max-width:900px){
+  .video-grid{grid-template-columns:1fr;gap:32px;}
+}
+
+/* ============================================================
    3D SHOWCASE
    ============================================================ */
 .showcase-grid{
@@ -543,9 +586,10 @@ ul{margin:0;padding:0;list-style:none;}
 .social-row{display:flex;gap:12px;margin-top:20px;}
 .social-row a{
   width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line-light);
-  display:flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s;
+  display:flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s,color .25s;
 }
 .social-row a:hover{background:var(--gold-500);color:var(--navy-950);border-color:var(--gold-500);}
+.social-row a.whatsapp:hover{background:var(--whatsapp);border-color:var(--whatsapp);color:#fff;}
 .footer-bottom{
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--silver-500);
 }
@@ -587,6 +631,31 @@ ul{margin:0;padding:0;list-style:none;}
   width:48px;display:flex;align-items:center;justify-content:center;color:var(--gold-600);font-size:16px;
 }
 
+/* ============================================================
+   WHATSAPP FLOATING BUTTON
+   ============================================================ */
+.whatsapp-launcher{
+  position:fixed;bottom:98px;right:26px;z-index:1200;
+  width:60px;height:60px;border-radius:50%;
+  background:var(--whatsapp);
+  color:#fff;font-size:26px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 16px 32px -10px rgba(37,211,102,0.65);
+  transition:transform .3s var(--ease), background .3s var(--ease);
+}
+.whatsapp-launcher:hover{transform:scale(1.08);background:var(--whatsapp-dark);}
+.whatsapp-launcher .wa-ping{
+  position:absolute;inset:0;border-radius:50%;background:var(--whatsapp);
+  opacity:0.55;animation:waPing 2.2s ease-out infinite;
+  pointer-events:none;
+}
+@keyframes waPing{
+  0%{transform:scale(1);opacity:0.55;}
+  100%{transform:scale(1.7);opacity:0;}
+}
+@media (prefers-reduced-motion: reduce){
+  .whatsapp-launcher .wa-ping{animation:none;display:none;}
+}
+
 /* utility */
 .text-center{text-align:center;}
 .mx-auto{margin-left:auto;margin-right:auto;}
@@ -600,14 +669,7 @@ ul{margin:0;padding:0;list-style:none;}
 <header class="site-header" id="siteHeader">
   <div class="container">
     <a href="#home" class="brand" aria-label="Rolex Construction home">
-      <svg class="brand-mark" viewBox="0 0 140 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M16 86 L70 32 L124 86" stroke="#c9a227" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="34" y="44" width="13" height="42" fill="#d7dadf"/>
-        <rect x="51" y="26" width="15" height="60" fill="#eef1f5"/>
-        <rect x="70" y="38" width="13" height="48" fill="#d7dadf"/>
-        <rect x="87" y="48" width="15" height="38" fill="#c9a227"/>
-        <rect x="106" y="54" width="11" height="32" fill="#d7dadf"/>
-      </svg>
+      <img class="brand-mark" src="assets/logo.png" alt="Rolex Construction logo">
       <span class="brand-word">ROLEX<small>CONSTRUCTION</small></span>
     </a>
 
@@ -616,6 +678,7 @@ ul{margin:0;padding:0;list-style:none;}
       <a href="#about" data-nav>About</a>
       <a href="#services" data-nav>Services</a>
       <a href="#portfolio" data-nav>Portfolio</a>
+      <a href="#video" data-nav>Watch</a>
       <a href="#showcase" data-nav>Showcase</a>
       <a href="#testimonials" data-nav>Testimonials</a>
       <a href="#contact" data-nav>Contact</a>
@@ -647,7 +710,7 @@ ul{margin:0;padding:0;list-style:none;}
           <a href="#contact" class="btn btn-ghost">Request Consultation</a>
         </div>
         <div class="hero-meta">
-          <div><strong>Leo</strong><span>Founder &amp; Principal</span></div>
+          <!-- <div><strong>Leo</strong><span>Founder &amp; Principal</span></div> -->
           <div><strong>Atlanta, USA</strong><span>Where we build</span></div>
           <div><strong>One Team</strong><span>Engineering to handoff</span></div>
         </div>
@@ -671,9 +734,9 @@ ul{margin:0;padding:0;list-style:none;}
         <div class="about-copy" data-reveal>
           <p class="eyebrow">About Rolex Construction</p>
           <h2 style="margin-top:18px;margin-bottom:26px;font-size:clamp(28px,3.6vw,40px);color:var(--navy-900);">Built on precision, led by experience.</h2>
-          <p>Based in <strong>Atlanta, Georgia</strong>, Rolex Construction plans and builds residential and commercial projects with the same discipline from the first site survey to the final inspection. Under the leadership of <strong>Leo</strong>, our team manages every phase in-house — engineering, permitting, contracting, and delivery — so clients work with one accountable partner instead of a chain of subcontractors.</p>
+          <p>Based in <strong>Atlanta, Georgia</strong>, Rolex Construction plans and builds residential and commercial projects with the same discipline from the first site survey to the final inspection. Under the leadership, our team manages every phase in-house — engineering, permitting, contracting, and delivery — so clients work with one accountable partner instead of a chain of subcontractors.</p>
           <p>Whether it's a custom home, a tenant build-out, or a ground-up commercial development, we treat every site the same way: measured first, built right, finished on schedule.</p>
-          <a href="#contact" class="btn btn-dark" style="margin-top:10px;">Talk to Leo <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#contact" class="btn btn-dark" style="margin-top:10px;">Talk to agent <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="pillars" data-reveal>
@@ -784,6 +847,42 @@ ul{margin:0;padding:0;list-style:none;}
     </div>
   </section>
 
+  <!-- ============================================================ VIDEO SHOWCASE ============================================================ -->
+  <section class="section" id="video">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">See It In Motion</p>
+        <h2>Watch us build.</h2>
+        <p>A walkthrough of our process, from groundbreaking to final handoff.</p>
+      </div>
+
+      <div class="video-grid">
+        <div class="video-frame" id="videoFrame" data-reveal>
+          <video id="companyVideo" poster="assets/video-poster.jpg" controls playsinline preload="metadata">
+            <source src="assets/rolex-construction-showcase.mp4" type="video/mp4">
+            Your browser doesn't support embedded video. <a href="assets/rolex-construction-showcase.mp4">Download the video</a> instead.
+          </video>
+          <div class="video-play-hint" aria-hidden="true"><i class="fa-solid fa-play"></i></div>
+        </div>
+
+        <div class="video-points" data-reveal>
+          <div class="video-point">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <div><h4>Planning &amp; Permitting</h4><p>See how a project moves from site survey through approved permits.</p></div>
+          </div>
+          <div class="video-point">
+            <i class="fa-solid fa-helmet-safety"></i>
+            <div><h4>On-Site Execution</h4><p>A look at our crews at work, coordinated on a single schedule.</p></div>
+          </div>
+          <div class="video-point">
+            <i class="fa-solid fa-key"></i>
+            <div><h4>Turn Key Handoff</h4><p>The final walkthrough — move-in ready, on time.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================================================ 3D SHOWCASE ============================================================ -->
   <section class="section section-dark" id="showcase">
     <svg class="divider-skyline" viewBox="0 0 1440 64" preserveAspectRatio="none" style="margin-top:-120px;position:relative;z-index:1;transform:scaleY(-1);" aria-hidden="true">
@@ -840,7 +939,7 @@ ul{margin:0;padding:0;list-style:none;}
         <div class="testimonial-track" id="testimonialTrack">
           <div class="testimonial-slide active">
             <div class="stars">★★★★★</div>
-            <p class="quote">"Working with Rolex Construction felt like having an in-house team. Leo and the crew handled permitting, scheduling, and every trade without us having to chase anyone down."</p>
+            <p class="quote">"Working with Rolex Construction felt like having an in-house team. The crew handled permitting, scheduling, and every trade without us having to chase anyone down."</p>
             <p class="who">Marcus Whitfield</p>
             <p class="role">Homeowner, Brookhaven Custom Residence</p>
           </div>
@@ -883,7 +982,11 @@ ul{margin:0;padding:0;list-style:none;}
           <div class="contact-info-list">
             <div class="contact-info-item">
               <i class="fa-solid fa-phone"></i>
-              <div><strong>Leo — Founder</strong><span><a href="tel:+14708833333">+1 (470) 883-3333</a></span></div>
+              <div><strong>Founder</strong><span><a href="tel:+14708833333">+1 (470) 883-3333</a></span></div>
+            </div>
+            <div class="contact-info-item">
+              <i class="fa-brands fa-whatsapp"></i>
+              <div><strong>WhatsApp</strong><span><a href="https://wa.me/14708833333" target="_blank" rel="noopener">Message us on WhatsApp</a></span></div>
             </div>
             <div class="contact-info-item">
               <i class="fa-solid fa-envelope"></i>
@@ -943,7 +1046,7 @@ ul{margin:0;padding:0;list-style:none;}
             <div class="form-success" id="formSuccess">
               <i class="fa-solid fa-circle-check"></i>
               <h4>Message received.</h4>
-              <p>Thanks for reaching out — Leo and the team will follow up within one business day. For anything urgent, call <a href="tel:+14708833333" style="color:var(--gold-600);font-weight:700;">+1 (470) 883-3333</a>.</p>
+              <p>Thanks for reaching out — The team will follow up within one business day. For anything urgent, call <a href="tel:+14708833333" style="color:var(--gold-600);font-weight:700;">+1 (470) 883-3333</a>.</p>
             </div>
           </form>
         </div>
@@ -959,21 +1062,15 @@ ul{margin:0;padding:0;list-style:none;}
     <div class="footer-top">
       <div class="footer-col footer-brand">
         <div class="brand">
-          <svg class="brand-mark" viewBox="0 0 140 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M16 86 L70 32 L124 86" stroke="#c9a227" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="34" y="44" width="13" height="42" fill="#d7dadf"/>
-            <rect x="51" y="26" width="15" height="60" fill="#eef1f5"/>
-            <rect x="70" y="38" width="13" height="48" fill="#d7dadf"/>
-            <rect x="87" y="48" width="15" height="38" fill="#c9a227"/>
-            <rect x="106" y="54" width="11" height="32" fill="#d7dadf"/>
-          </svg>
+          <img class="brand-mark" src="assets/logo.png" alt="Rolex Construction logo">
           <span class="brand-word">ROLEX<small>CONSTRUCTION</small></span>
         </div>
         <p>Residential and commercial construction in Atlanta, Georgia — excellence in every build.</p>
         <div class="social-row">
-          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.facebook.com/share/1BsEA2F9vq/?mibextid=wwXIfr" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/rolex.construction?igsh=OXc3a29nN3c1ZW1p&utm_source=qr" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://maps.app.goo.gl/uD5VdFN5HXUzrWm87?g_st=iw" aria-label="GoogleMap"><i class="fa-solid fa-location-dot"></i></a>
+          <a href="https://wa.me/14708833333" target="_blank" rel="noopener" class="whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
       </div>
 
@@ -984,6 +1081,7 @@ ul{margin:0;padding:0;list-style:none;}
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#video">Watch</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -1002,6 +1100,7 @@ ul{margin:0;padding:0;list-style:none;}
         <h5>Contact</h5>
         <ul>
           <li><a href="tel:+14708833333">+1 (470) 883-3333</a></li>
+          <li><a href="https://wa.me/14708833333" target="_blank" rel="noopener">WhatsApp</a></li>
           <li><a href="mailto:info@rolexconstruction.com">info@rolexconstruction.com</a></li>
           <li><span>Atlanta, USA</span></li>
         </ul>
@@ -1014,6 +1113,12 @@ ul{margin:0;padding:0;list-style:none;}
     </div>
   </div>
 </footer>
+
+<!-- ============================================================ WHATSAPP FLOATING BUTTON ============================================================ -->
+<a class="whatsapp-launcher" href="https://wa.me/14708833333" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <span class="wa-ping" aria-hidden="true"></span>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
 
 <!-- ============================================================ CHAT WIDGET ============================================================ -->
 <button class="chat-launcher" id="chatLauncher" aria-label="Open chat" aria-expanded="false" aria-controls="chatPanel">
@@ -1098,6 +1203,15 @@ filterBtns.forEach(btn => {
     });
   });
 });
+
+/* ---------- Company video play state ---------- */
+const companyVideo = document.getElementById('companyVideo');
+const videoFrame = document.getElementById('videoFrame');
+if (companyVideo && videoFrame) {
+  companyVideo.addEventListener('play', () => videoFrame.classList.add('is-playing'));
+  companyVideo.addEventListener('pause', () => videoFrame.classList.remove('is-playing'));
+  companyVideo.addEventListener('ended', () => videoFrame.classList.remove('is-playing'));
+}
 
 /* ---------- 3D tilt cards ---------- */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1216,7 +1330,7 @@ function sendChat() {
   addChatMsg(val, 'user');
   chatInput.value = '';
   setTimeout(() => {
-    addChatMsg("Thanks for the details — someone from our team will reach out shortly. For anything urgent, call Leo directly at +1 (470) 883-3333.", 'bot');
+    addChatMsg("Thanks for the details — someone from our team will reach out shortly. For anything urgent, call agent directly at +1 (470) 883-3333.", 'bot');
   }, 900);
 }
 chatSend.addEventListener('click', sendChat);
