@@ -379,6 +379,75 @@ ul{margin:0;padding:0;list-style:none;}
 @media (max-width:560px){.services-grid{grid-template-columns:1fr;}}
 
 /* ============================================================
+   FULL SERVICES — BLUEPRINT LEDGER
+   ============================================================ */
+.blueprint-ledger{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:
+    repeating-linear-gradient(0deg, rgba(11,34,64,0.035) 0 1px, transparent 1px 34px),
+    repeating-linear-gradient(90deg, rgba(11,34,64,0.035) 0 1px, transparent 1px 34px),
+    #ffffff;
+  box-shadow:var(--shadow-sm);
+}
+.ledger-item{border-bottom:1px solid var(--line);}
+.ledger-item:last-child{border-bottom:none;}
+.ledger-trigger{
+  width:100%;display:flex;align-items:center;gap:22px;
+  padding:26px 30px;text-align:left;background:transparent;
+  transition:background .3s var(--ease);
+}
+.ledger-trigger:hover{background:rgba(201,162,39,0.05);}
+.ledger-num{
+  font-family:'Playfair Display',serif;font-size:26px;font-weight:800;
+  color:var(--gold-500);width:52px;flex-shrink:0;text-align:center;
+  border-right:1.5px dashed var(--line);padding-right:18px;
+}
+.ledger-title-wrap{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0;}
+.ledger-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--navy-900);font-weight:700;}
+.ledger-sub{font-size:13.5px;color:var(--ink-soft);}
+.ledger-chevron{
+  flex-shrink:0;width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid var(--line);color:var(--navy-900);font-size:12px;
+  transition:transform .35s var(--ease), background .35s var(--ease), color .35s var(--ease);
+}
+.ledger-item.is-open .ledger-chevron{
+  transform:rotate(180deg);background:var(--navy-900);color:var(--gold-300);border-color:var(--navy-900);
+}
+.ledger-panel{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s var(--ease);
+}
+.ledger-panel-inner{padding:0 30px 32px 82px;}
+.ledger-panel-inner p{font-size:15px;line-height:1.7;color:var(--ink-soft);margin-bottom:18px;max-width:620px;}
+.chip-row{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:4px;}
+.chip{
+  font-size:12.5px;font-weight:700;color:var(--navy-800);
+  background:rgba(11,34,64,0.06);border:1px solid var(--line);
+  padding:7px 14px;border-radius:999px;
+}
+.flow-chain{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  padding-top:20px;margin-top:20px;border-top:1px dashed var(--line);
+}
+.flow-chain span{
+  font-size:12px;font-weight:800;letter-spacing:0.03em;
+  color:var(--navy-950);background:var(--gold-300);
+  padding:6px 12px;border-radius:6px;
+}
+.flow-chain i{color:var(--silver-500);font-size:11px;}
+
+@media (max-width:640px){
+  .ledger-trigger{padding:20px 18px;gap:14px;}
+  .ledger-num{font-size:19px;width:36px;padding-right:10px;}
+  .ledger-title{font-size:16px;}
+  .ledger-sub{font-size:12.5px;}
+  .ledger-panel-inner{padding:0 18px 26px 54px;}
+}
+
+/* ============================================================
    PORTFOLIO
    ============================================================ */
 .portfolio-head{
@@ -677,6 +746,7 @@ ul{margin:0;padding:0;list-style:none;}
       <a href="#home" data-nav>Home</a>
       <a href="#about" data-nav>About</a>
       <a href="#services" data-nav>Services</a>
+      <a href="#full-services" data-nav>Full Scope</a>
       <a href="#portfolio" data-nav>Portfolio</a>
       <a href="#video" data-nav>Watch</a>
       <a href="#showcase" data-nav>Showcase</a>
@@ -724,6 +794,42 @@ ul{margin:0;padding:0;list-style:none;}
         <rect x="640" y="120" width="42" height="180" fill="#c9a227" opacity="0.9"/>
         <rect x="980" y="160" width="34" height="140" fill="#aab0ba" opacity="0.5"/>
       </svg>
+    </div>
+  </section>
+
+  <!-- ============================================================ VIDEO SHOWCASE ============================================================ -->
+  <section class="section" id="video">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">See It In Motion</p>
+        <h2>Watch us build.</h2>
+        <p>A walkthrough of our process, from groundbreaking to final handoff.</p>
+      </div>
+
+      <div class="video-grid">
+        <div class="video-frame" id="videoFrame" data-reveal>
+          <video id="companyVideo" poster="assets/video-poster.jpg" controls playsinline preload="metadata">
+            <source src="assets/rolex-construction-showcase.mp4" type="video/mp4">
+            Your browser doesn't support embedded video. <a href="assets/rolex-construction-showcase.mp4">Download the video</a> instead.
+          </video>
+          <div class="video-play-hint" aria-hidden="true"><i class="fa-solid fa-play"></i></div>
+        </div>
+
+        <div class="video-points" data-reveal>
+          <div class="video-point">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <div><h4>Planning &amp; Permitting</h4><p>See how a project moves from site survey through approved permits.</p></div>
+          </div>
+          <div class="video-point">
+            <i class="fa-solid fa-helmet-safety"></i>
+            <div><h4>On-Site Execution</h4><p>A look at our crews at work, coordinated on a single schedule.</p></div>
+          </div>
+          <div class="video-point">
+            <i class="fa-solid fa-key"></i>
+            <div><h4>Turn Key Handoff</h4><p>The final walkthrough — move-in ready, on time.</p></div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -803,6 +909,224 @@ ul{margin:0;padding:0;list-style:none;}
     </div>
   </section>
 
+  <!-- ============================================================ FULL SERVICES — BLUEPRINT LEDGER ============================================================ -->
+  <section class="section" id="full-services" aria-label="Full scope of services">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">The Full Scope</p>
+        <h2>Eight disciplines, read like a set of drawings.</h2>
+        <p>Rolex Construction manages the entire development process in-house — from the first feasibility study to the final Certificate of Occupancy — coordinated as one delivery system rather than eight separate hand-offs. Tap a sheet to open it.</p>
+      </div>
+
+      <div class="blueprint-ledger" id="blueprintLedger">
+
+        <div class="ledger-item is-open" data-index="01">
+          <button class="ledger-trigger" aria-expanded="true">
+            <span class="ledger-num">01</span>
+            <span class="ledger-title-wrap">
+              <span class="ledger-title">Development Consulting &amp; Owner Representation</span>
+              <span class="ledger-sub">Feasibility, strategy, and representing your interests end to end</span>
+            </span>
+            <span class="ledger-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="ledger-panel">
+            <div class="ledger-panel-inner">
+              <p>We help owners, investors, and developers evaluate and execute opportunities — from preliminary site evaluation through conceptual budgeting and development-risk assessment — then represent your interests as the project moves through every consultant and agency involved.</p>
+              <div class="chip-row">
+                <span class="chip">Feasibility Studies</span>
+                <span class="chip">Site Evaluation</span>
+                <span class="chip">Conceptual Budgeting</span>
+                <span class="chip">Preliminary Zoning Review</span>
+                <span class="chip">Due-Diligence Coordination</span>
+                <span class="chip">Value Engineering</span>
+                <span class="chip">Construction Scheduling</span>
+                <span class="chip">Contractor &amp; Vendor Strategy</span>
+              </div>
+              <div class="flow-chain" aria-label="Owner representation coordination flow">
+                <span>Owner</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Architect</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Engineers</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Surveyor</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Municipality</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Contractors</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Inspectors</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-item" data-index="02">
+          <button class="ledger-trigger" aria-expanded="false">
+            <span class="ledger-num">02</span>
+            <span class="ledger-title-wrap">
+              <span class="ledger-title">Permitting &amp; Government Approvals</span>
+              <span class="ledger-sub">Our core specialty — a managed process, not just paperwork</span>
+            </span>
+            <span class="ledger-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="ledger-panel">
+            <div class="ledger-panel-inner">
+              <p>We navigate the approval process with every authority having jurisdiction — from pre-application meetings through the full plan-review and comment cycle — so your permit timeline stays predictable.</p>
+              <div class="chip-row">
+                <span class="chip">Zoning &amp; Land-Use Review</span>
+                <span class="chip">Pre-Application Coordination</span>
+                <span class="chip">Building Permits</span>
+                <span class="chip">Land-Disturbance Permits</span>
+                <span class="chip">Demolition Permits</span>
+                <span class="chip">Fire Marshal Review</span>
+                <span class="chip">Utility &amp; Right-of-Way Permits</span>
+                <span class="chip">Certificate of Occupancy</span>
+              </div>
+              <div class="flow-chain" aria-label="Plan review and comment cycle">
+                <span>Submission</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Agency Review</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Comments</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Design Response</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Resubmittal</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Approval</span><i class="fa-solid fa-arrow-right"></i>
+                <span>Permit</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-item" data-index="03">
+          <button class="ledger-trigger" aria-expanded="false">
+            <span class="ledger-num">03</span>
+            <span class="ledger-title-wrap">
+              <span class="ledger-title">Architecture &amp; Engineering Coordination</span>
+              <span class="ledger-sub">Keeping every consultant on one drawing set</span>
+            </span>
+            <span class="ledger-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="ledger-panel">
+            <div class="ledger-panel-inner">
+              <p>Architects, structural engineers, and MEP consultants working from the same drawing set, on the same schedule, so design intent survives contact with the site.</p>
+              <div class="chip-row">
+                <span class="chip">Design Coordination</span>
+                <span class="chip">Structural Review</span>
+                <span class="chip">MEP Coordination</span>
+                <span class="chip">Drawing Set Management</span>
+                <span class="chip">RFI Coordination</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-item" data-index="04">
+          <button class="ledger-trigger" aria-expanded="false">
+            <span class="ledger-num">04</span>
+            <span class="ledger-title-wrap">
+              <span class="ledger-title">Preconstruction &amp; Estimating</span>
+              <span class="ledger-sub">Pricing and sequencing before a shovel hits the ground</span>
+            </span>
+            <span class="ledger-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="ledger-panel">
+            <div class="ledger-panel-inner">
+              <p>Cost estimating, constructability review, and schedule development that catch problems on paper — where they're cheap to fix — instead of in the field.</p>
+              <div class="chip-row">
+                <span class="chip">Cost Estimating</span>
+                <span class="chip">Constructability Review</span>
+                <span class="chip">Bid Coordination</span>
+                <span class="chip">Schedule Development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-item" data-index="05">
+          <button class="ledger-trigger" aria-expanded="false">
+            <span class="ledger-num">05</span>
+            <span class="ledger-title-wrap">
+              <span class="ledger-title">General Contracting &amp; Construction Management</span>
+              <span class="ledger-sub">Licensed oversight from groundbreak to final punch list</span>
+            </span>
+            <span class="ledger-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="ledger-panel">
+            <div class="ledger-panel-inner">
+              <p>Every trade on site working to the same budget, schedule, and finish date — with one team accountable for quality control throughout.</p>
+              <div class="chip-row">
+                <span class="chip">Trade Oversight</span>
+                <span class="chip">Budget Management</span>
+                <span class="chip">Schedule Management</span>
+                <span class="chip">Quality Control</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-item" data-index="06">
+          <button class="ledger-trigger" aria-expanded="false">
+            <span class="ledger-num">06</span>
+            <span class="ledger-title-wrap">
+              <span class="ledger-title">Site Development &amp; Infrastructure</span>
+              <span class="ledger-sub">Getting the ground itself ready to build on</span>
+            </span>
+            <span class="ledger-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="ledger-panel">
+            <div class="ledger-panel-inner">
+              <p>Grading, utilities, and civil groundwork completed ahead of vertical construction, so the site is ready when the crews are.</p>
+              <div class="chip-row">
+                <span class="chip">Site Grading</span>
+                <span class="chip">Utility Coordination</span>
+                <span class="chip">Stormwater Management</span>
+                <span class="chip">Civil Infrastructure</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-item" data-index="07">
+          <button class="ledger-trigger" aria-expanded="false">
+            <span class="ledger-num">07</span>
+            <span class="ledger-title-wrap">
+              <span class="ledger-title">Commercial &amp; Residential Construction</span>
+              <span class="ledger-sub">Ground-up delivery across property types</span>
+            </span>
+            <span class="ledger-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="ledger-panel">
+            <div class="ledger-panel-inner">
+              <p>From custom homes to offices, retail, and mixed-use development — the same accountable process, sized to the project.</p>
+              <div class="chip-row">
+                <span class="chip">Custom Homes</span>
+                <span class="chip">Office Build-Outs</span>
+                <span class="chip">Retail Spaces</span>
+                <span class="chip">Mixed-Use Development</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ledger-item" data-index="08">
+          <button class="ledger-trigger" aria-expanded="false">
+            <span class="ledger-num">08</span>
+            <span class="ledger-title-wrap">
+              <span class="ledger-title">Remodeling &amp; Renovation</span>
+              <span class="ledger-sub">Updating and expanding what's already standing</span>
+            </span>
+            <span class="ledger-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+          </button>
+          <div class="ledger-panel">
+            <div class="ledger-panel-inner">
+              <p>Interior remodels, additions, and tenant improvements handled with the same permitting and quality discipline as a ground-up build.</p>
+              <div class="chip-row">
+                <span class="chip">Interior Remodels</span>
+                <span class="chip">Additions</span>
+                <span class="chip">Tenant Improvements</span>
+                <span class="chip">Structural Renovation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ============================================================ PORTFOLIO ============================================================ -->
   <section class="section" id="portfolio">
     <div class="container">
@@ -842,42 +1166,6 @@ ul{margin:0;padding:0;list-style:none;}
         <div class="portfolio-card" data-category="commercial" data-reveal>
           <img src="assets/sample7.png?auto=format&fit=crop&w=900&q=80" alt="West Midtown retail space" loading="lazy">
           <div class="portfolio-overlay"><span class="portfolio-tag">Commercial</span><h4>West Midtown Retail Space</h4></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ VIDEO SHOWCASE ============================================================ -->
-  <section class="section" id="video">
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">See It In Motion</p>
-        <h2>Watch us build.</h2>
-        <p>A walkthrough of our process, from groundbreaking to final handoff.</p>
-      </div>
-
-      <div class="video-grid">
-        <div class="video-frame" id="videoFrame" data-reveal>
-          <video id="companyVideo" poster="assets/video-poster.jpg" controls playsinline preload="metadata">
-            <source src="assets/rolex-construction-showcase.mp4" type="video/mp4">
-            Your browser doesn't support embedded video. <a href="assets/rolex-construction-showcase.mp4">Download the video</a> instead.
-          </video>
-          <div class="video-play-hint" aria-hidden="true"><i class="fa-solid fa-play"></i></div>
-        </div>
-
-        <div class="video-points" data-reveal>
-          <div class="video-point">
-            <i class="fa-solid fa-clipboard-check"></i>
-            <div><h4>Planning &amp; Permitting</h4><p>See how a project moves from site survey through approved permits.</p></div>
-          </div>
-          <div class="video-point">
-            <i class="fa-solid fa-helmet-safety"></i>
-            <div><h4>On-Site Execution</h4><p>A look at our crews at work, coordinated on a single schedule.</p></div>
-          </div>
-          <div class="video-point">
-            <i class="fa-solid fa-key"></i>
-            <div><h4>Turn Key Handoff</h4><p>The final walkthrough — move-in ready, on time.</p></div>
-          </div>
         </div>
       </div>
     </div>
@@ -1080,6 +1368,7 @@ ul{margin:0;padding:0;list-style:none;}
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
+          <li><a href="#full-services">Full Scope</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#video">Watch</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -1335,6 +1624,32 @@ function sendChat() {
 }
 chatSend.addEventListener('click', sendChat);
 chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendChat(); });
+
+/* ---------- Full Services — blueprint ledger accordion ---------- */
+document.querySelectorAll('.ledger-item').forEach(item => {
+  const trigger = item.querySelector('.ledger-trigger');
+  const panel = item.querySelector('.ledger-panel');
+  if (item.classList.contains('is-open')) {
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  }
+  trigger.addEventListener('click', () => {
+    const isOpen = item.classList.contains('is-open');
+    if (isOpen) {
+      panel.style.maxHeight = 0;
+      item.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    } else {
+      item.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+  });
+});
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.ledger-item.is-open .ledger-panel').forEach(panel => {
+    panel.style.maxHeight = panel.scrollHeight + 'px';
+  });
+});
 </script>
 </body>
 </html>
