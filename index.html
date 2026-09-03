@@ -1324,7 +1324,11 @@ ul{margin:0;padding:0;list-style:none;}
         </div>
 
         <div data-reveal>
-          <form class="contact-form" id="contactForm" novalidate>
+          <form class="contact-form" id="contactForm" novalidate action="https://formsubmit.co/priyeshraj2803@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New project inquiry — Rolex Construction website">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
             <div id="formFields">
               <div class="form-row">
                 <div class="field" id="field-name">
@@ -1617,10 +1621,42 @@ form.addEventListener('submit', (e) => {
   if (message.length < 10) { setError('field-message', 'Please add a few details about your project.'); valid = false; }
   else setError('field-message', '');
 
-  if (valid) {
-    formFields.style.display = 'none';
-    formSuccess.classList.add('show');
-  }
+  if (!valid) return;
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnHTML = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending...';
+
+  // Open a pre-filled WhatsApp chat now, inside the click gesture,
+  // so browsers don't block it as a popup once the fetch resolves later.
+  const waText =
+    'New website inquiry\n' +
+    'Name: ' + name + '\n' +
+    'Phone: ' + phone + '\n' +
+    'Email: ' + email + '\n' +
+    'Project type: ' + type + '\n' +
+    'Details: ' + message;
+  window.open('https://wa.me/14708833333?text=' + encodeURIComponent(waText), '_blank', 'noopener');
+
+  // Send the same details to inbox via FormSubmit (free, no backend required).
+  fetch('https://formsubmit.co/ajax/info@rolexconstruction.com', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name, phone, email, type, message,
+      _subject: 'New project inquiry — Rolex Construction website',
+      _template: 'table'
+    })
+  })
+    .catch((err) => console.error('FormSubmit delivery failed:', err))
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHTML;
+      formFields.style.display = 'none';
+      formSuccess.classList.add('show');
+      form.reset();
+    });
 });
 
 /* ---------- Chat widget ---------- */
